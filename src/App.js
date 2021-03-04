@@ -28,7 +28,7 @@ export default function App() {
         <CreateLink toggleRefresh={() => setRefresh(p => !p)} />
       </div>
       <div>
-        <h1>List o Links</h1>
+        <h1>List O' Links</h1>
         <LinkList toggleRefresh={() => setRefresh(p => !p)} links={links} />
       </div>
     </div>

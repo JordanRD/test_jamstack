@@ -8,7 +8,7 @@ export default function App() {
   const [refresh, setRefresh] = useState(false)
   const loadLinks = async () => {
     try {
-      const { data } = await axios.get('/api/getLinks')
+      const { data } = await axios.get('/.netlify/functions/getLinks')
       // console.log(data)
       setLinks(data)
     }
@@ -54,7 +54,7 @@ function CreateLink({ toggleRefresh }) {
       Object.values(link).forEach(data => {
         if (!data) return
       })
-      await axios.post('/api/createLink', link)
+      await axios.post('/.netlify/functions/createLink', link)
       setLink(initial)
       toggleRefresh()
     } catch (error) {
@@ -135,7 +135,7 @@ function LinkCard({ link = {}, toggleRefresh }) {
   const archiveLink = async () => {
     link.archived = !archived
     try {
-      await axios.put('/api/updateLink', link)
+      await axios.put('/.netlify/functions/updateLink', link)
       // console.log('hai')
       toggleRefresh()
     } catch (error) {
@@ -146,7 +146,7 @@ function LinkCard({ link = {}, toggleRefresh }) {
   const deleteLink = async () => {
     try {
       // console.log(_id)
-      await axios.delete('/api/deleteLink', { data: { _id } })
+      await axios.delete('/.netlify/functions/deleteLink', { data: { _id } })
       toggleRefresh()
     } catch (error) {
       // console.log(error)

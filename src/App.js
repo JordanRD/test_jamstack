@@ -9,11 +9,11 @@ export default function App() {
   const loadLinks = async () => {
     try {
       const { data } = await axios.get('/api/getLinks')
-      console.log(data)
+      // console.log(data)
       setLinks(data)
     }
     catch (err) {
-      console.log(err)
+      // console.log(err)
     }
   }
 
@@ -48,10 +48,13 @@ function CreateLink({ toggleRefresh }) {
     setLink(p => ({ ...p, [name]: value }))
   }
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await axios.post('/api/createLink',link)
+      Object.values(link).forEach(data => {
+        if (!data) return
+      })
+      await axios.post('/api/createLink', link)
       setLink(initial)
       toggleRefresh()
     } catch (error) {
@@ -133,20 +136,20 @@ function LinkCard({ link = {}, toggleRefresh }) {
     link.archived = !archived
     try {
       await axios.put('/api/updateLink', link)
-      console.log('hai')
+      // console.log('hai')
       toggleRefresh()
     } catch (error) {
-      console.log(error)
+      // console.log(error)
     }
   }
 
   const deleteLink = async () => {
     try {
-      console.log(_id)
-      await axios.delete('/api/deleteLink', {data: { _id }})
+      // console.log(_id)
+      await axios.delete('/api/deleteLink', { data: { _id } })
       toggleRefresh()
     } catch (error) {
-      console.log(error)
+      // console.log(error)
     }
   }
 
